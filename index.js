@@ -1,9 +1,9 @@
 let readlineS = require("readline-sync");
+let userName;
 let operation = ["/", "*", "-", "+"];
 let userOperation;
 let userFirstNumber;
 let userSecondNumber;
-let userName;
 
 const start = () => {
   userName = readlineS.question("What is your name? ");
