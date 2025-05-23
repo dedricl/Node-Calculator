@@ -8,12 +8,10 @@ let userSecondNumber;
 const start = () => {
   userName = readlineS.question("What is your name? ");
   userName = userName.charAt(0).toUpperCase() + userName.slice(1);
-  userOperation = readlineS.question(
-    `Hello ${userName}! What operation would you like to perform? `
-  );
+  userOperation;
   while (!operation.includes(userOperation)) {
     userOperation = readlineS.question(
-      `Sorry that is not a valid operation! What operation would you like to perform? `
+      `Hello ${userName}! What operation would you like to perform? `
     );
   }
 };
