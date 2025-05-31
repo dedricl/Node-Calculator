@@ -1,35 +1,25 @@
-let readlineS = require("readline-sync");
-let userName;
-let operation = ["/", "*", "-", "+"];
-let userOperation;
-let userFirstNumber;
-let userSecondNumber;
+const readlineS = require("readline-sync");
+const operation = ["/", "*", "-", "+"];
 
-const start = () => {
-  userName = readlineS.question("What is your name? ");
-  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
-  userOperation;
+const askUseroperation = (userName) => {
+  let userOperation;
   while (!operation.includes(userOperation)) {
     userOperation = readlineS.question(
       `Hello ${userName}! What operation would you like to perform? `
     );
   }
+  return userOperation;
 };
 
-const askFirstNumber = () => {
-  userFirstNumber = readlineS.questionInt("Please enter the first number? ");
-  while (typeof userFirstNumber !== "number") {
+const askNumber = (promptNumber) => {
+  const userNumber = readlineS.questionInt(
+    `Please enter the ${promptNumber} number? `
+  );
+  while (typeof userNumber !== "number") {
     console.log("This is not a number");
-    askFirstNumber();
+    askNumber();
   }
-};
-
-const askSecondNumber = () => {
-  userSecondNumber = readlineS.questionInt("Please enter the second number? ");
-  while (typeof userSecondNumber !== "number") {
-    console.log("This is not a number");
-    askSecondNumber();
-  }
+  return userNumber;
 };
 
 const calculation = (operand, num1, num2) => {
@@ -52,13 +42,21 @@ const calculation = (operand, num1, num2) => {
   }
 };
 
+const start = () => {
+  let userName = readlineS.question("What is your name? ");
+  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+
+  const operation = askUseroperation(userName);
+  const userFirstNumber = askNumber("first");
+  const userSecondNumber = askNumber("second");
+
+  console.log(
+    `The result of ${userFirstNumber} ${operation} ${userSecondNumber} is ${calculation(
+      operation,
+      userFirstNumber,
+      userSecondNumber
+    )}!`
+  );
+};
+
 start();
-askFirstNumber();
-askSecondNumber();
-console.log(
-  `The result of ${userFirstNumber} ${userOperation} ${userSecondNumber} is ${calculation(
-    userOperation,
-    userFirstNumber,
-    userSecondNumber
-  )}!`
-);
